@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useContext, useEffect} from 'react'
 import ProductContext from '../../contexts/product/ProductContext';
 import Products from './ProductList';
 
@@ -11,7 +11,7 @@ export const Home = () => {
   }, []);
 
   return (
-    <div className={styles.container}>
+    <div>
       <div>
         <h1>PRODUCTOS</h1>
         <Products 

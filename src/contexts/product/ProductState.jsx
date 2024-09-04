@@ -1,4 +1,4 @@
-import { useReducer } from "react";
+import React, { useReducer, useState } from "react";
 import ProductReducer from './ProductReducer';
 import ProductContext from "./ProductContext";
 import axiosClient from '../../config/axios'
@@ -6,15 +6,16 @@ import axiosClient from '../../config/axios'
 
 const ProductState =(props) => {
     const initialState = {
-        products: []
-    }
+        products: [], 
+        loading: false,
+    };
     const [globalState, dispatch ] = useReducer(ProductReducer, initialState );
 
     const createProduct= async (dataForm) => {
         const form = {
             nombre: dataForm.nombre,
             precio: dataForm.precio,
-            descripción: dataForm.descripcion,
+            descripcion: dataForm.descripcion,
         }
         try {
             await axiosClient.post('/product/create', form);
@@ -27,14 +28,19 @@ const ProductState =(props) => {
     }
 
     const getProducts = async () => {
+        setLoading(true);
         try {
-            const res = await axiosClient.get(`/product/readall`);
+            const res = await axiosClient.get('/product/readall');
+            console.log('fetched Products', res.data );
+            
             dispatch({
-                type: "OBTENER-Productos",
+                type: "OBTENER-PRODUCTOS",
                 payload: res.data.products
             });
         } catch (error) {
 	        console.log(error);
+        } finally {
+            setLoading(false);
         }
     };
     
@@ -43,10 +49,10 @@ const ProductState =(props) => {
             id,
             nombre: dataForm.nombre,
             precio: dataForm.precio,
-            descripción: dataForm.descripcion
+            descripcion: dataForm.descripcion
         };
         try {
-            await axiosClient.put(`/product/update/:id`, form);
+            await axiosClient.put('/product/update/:id', form);
             getProducts();
         } catch (error) {
             console.log(error);
@@ -56,7 +62,7 @@ const ProductState =(props) => {
     const deleteProduct = async (id) => {
         const data = { id };
         try {
-            await axiosClient.delete(`/product/delete/:id`, { data });
+            await axiosClient.delete('/product/delete/:id', { data });
             getProducts();
         } catch (error) {
             console.log(error);
