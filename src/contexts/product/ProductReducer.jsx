@@ -1,9 +1,9 @@
 const reducer = (globalState, action) => {
     switch(action.type) {
-        case "OBTENER-GUITARRAS":
+        case "OBTENER-PRODUCTOS":
             return {
                 ...globalState,
-                guitars: action.payload
+                products: action.payload
             }
         default:
             return globalState
