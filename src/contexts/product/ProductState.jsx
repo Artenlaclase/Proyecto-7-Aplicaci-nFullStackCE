@@ -28,7 +28,7 @@ const ProductState =(props) => {
     }
 
     const getProducts = async () => {
-        setLoading(true);
+      
         try {
             const res = await axiosClient.get('/product/readall');
             console.log('fetched Products', res.data );
@@ -39,8 +39,6 @@ const ProductState =(props) => {
             });
         } catch (error) {
 	        console.log(error);
-        } finally {
-            setLoading(false);
         }
     };
     
