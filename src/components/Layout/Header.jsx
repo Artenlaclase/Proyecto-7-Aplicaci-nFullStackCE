@@ -1,55 +1,148 @@
+import React, { useState, useContext } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import AppBar from '@mui/material/AppBar';
+import Box from '@mui/material/Box';
+import Toolbar from '@mui/material/Toolbar';
+import Typography from '@mui/material/Typography';
+import IconButton from '@mui/material/IconButton';
+import MenuIcon from '@mui/icons-material/Menu';
+import AccountCircle from '@mui/icons-material/AccountCircle';
+import MenuItem from '@mui/material/MenuItem';
+import Menu from '@mui/material/Menu';
+import Drawer from '@mui/material/Drawer';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemText from '@mui/material/ListItemText';
+import Divider from '@mui/material/Divider';
+import UserContext from '../../contexts/users/UserContext';
 
-import React, { useContext } from 'react'
-import {
-    Link
-} from 'react-router-dom'
-import UserContext from '../../contexts/users/UserContext'
+export default function MenuAppBar() {
+  const [anchorEl, setAnchorEl] = useState(null);
+  const [drawerOpen, setDrawerOpen] = useState(false);
+  const navigate = useNavigate();
+  const { user, logout } = useContext(UserContext);
 
-export default function Header() {
+  const handleMenu = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
 
-    const ctx = useContext(UserContext)
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
 
-    const { logout, user }    = ctx
+  const handleLogout = () => {
+    logout();
+    setAnchorEl(null);
+    navigate('/iniciar-sesion');
+  };
 
-    return (
-        <div>
-            <ul>
-                <li>
-                    <Link to="/">
-                        Inicio
-                    </Link>
-                </li>
+  const toggleDrawer = (open) => (event) => {
+    if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
+      return;
+    }
+    setDrawerOpen(open);
+  };
 
-                {
-                    user?.username ?
-                        <>
-                            <li>
-                                <Link to="/perfil">
-                                    Perfil
-                                </Link>
-                            </li>
-                            <li onClick={() => { logout() }}>    
-                                <Link to="#">
-                                    Cerrar sesión
-                                </Link>
-                            </li>
-                        </> :
-                        <>
-                            <li>
-                                <Link to="/registro">
-                                    Registro
-                                </Link>
-                            </li>
-                            <li>
-                                <Link to="/iniciar-sesion">
-                                    Iniciar sesión
-                                </Link>
-                            </li>
-                        </>
-                }
+  const renderDrawerList = () => (
+    <Box
+      sx={{ width: 250 }}
+      role="presentation"
+      onClick={toggleDrawer(false)}
+      onKeyDown={toggleDrawer(false)}
+    >
+      <List>
+        <ListItem button component={Link} to="/">
+          <ListItemText primary="Inicio" />
+        </ListItem>
+        {user?.username ? (
+          <>
+            <ListItem button component={Link} to="/perfil">
+              <ListItemText primary="Perfil" />
+            </ListItem>
+            <ListItem button onClick={handleLogout}>
+              <ListItemText primary="Cerrar sesión" />
+            </ListItem>
+          </>
+        ) : (
+          <>
+            <ListItem button component={Link} to="/registro">
+              <ListItemText primary="Registro" />
+            </ListItem>
+            <ListItem button component={Link} to="/iniciar-sesion">
+              <ListItemText primary="Iniciar sesión" />
+            </ListItem>
+          </>
+        )}
+      </List>
+      <Divider />
+    </Box>
+  );
 
-
-            </ul>
-        </div>
-    )
+  return (
+    <Box sx={{ flexGrow: 1 }}>
+      <AppBar position="static">
+        <Toolbar>
+          <IconButton
+            size="large"
+            edge="start"
+            color="inherit"
+            aria-label="menu"
+            sx={{ mr: 2 }}
+            onClick={toggleDrawer(true)}
+          >
+            <MenuIcon />
+          </IconButton>
+          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+            Photos
+          </Typography>
+          {user?.username ? (
+            <div>
+              <IconButton
+                size="large"
+                aria-label="account of current user"
+                aria-controls="menu-appbar"
+                aria-haspopup="true"
+                onClick={handleMenu}
+                color="inherit"
+              >
+                <AccountCircle />
+              </IconButton>
+              <Menu
+                id="menu-appbar"
+                anchorEl={anchorEl}
+                anchorOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+                open={Boolean(anchorEl)}
+                onClose={handleClose}
+              >
+                <MenuItem onClick={handleClose} component={Link} to="/perfil">
+                  Perfil
+                </MenuItem>
+                <MenuItem onClick={handleLogout}>Cerrar sesión</MenuItem>
+              </Menu>
+            </div>
+          ) : (
+            <>
+              <MenuItem component={Link} to="/registro">
+                Registro
+              </MenuItem>
+              <MenuItem component={Link} to="/iniciar-sesion">
+                Iniciar sesión
+              </MenuItem>
+            </>
+          )}
+        </Toolbar>
+      </AppBar>
+      <Drawer anchor="left" open={drawerOpen} onClose={toggleDrawer(false)}>
+        {renderDrawerList()}
+      </Drawer>
+    </Box>
+  );
 }
