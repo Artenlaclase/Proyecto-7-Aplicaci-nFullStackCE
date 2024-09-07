@@ -13,7 +13,6 @@ export const Home = () => {
   return (
     <div>
       <div>
-        <h1>PRODUCTOS</h1>
         <Products 
           products={products} 
         />

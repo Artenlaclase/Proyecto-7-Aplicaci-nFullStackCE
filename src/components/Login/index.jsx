@@ -7,11 +7,12 @@ import { useNavigate } from 'react-router-dom';
 const providers = [{ id: 'credentials', name: 'Email and Password' }];
 
 const signIn = async (provider, formData) => {
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve, reject) => {  
     setTimeout(() => {
-      if (formData.get('email') === 'test@example.com' && formData.get('password') === 'password') {
+      if (formData.get('email') === 'email' && formData.get('password') === 'password') {
         alert('Ingreso exitoso.');
         resolve({ success: true });
+
       } else {
         alert('Credenciales incorrectas.');
         reject({ success: false });

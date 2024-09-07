@@ -15,7 +15,7 @@ const Products = ({ products, activateEditMode, sendDataToDeleteProduct }) => {
       <Grid container spacing={3} sx={{ paddingLeft: 2, paddingRight: 2 }}>
         {products.map((product) => (
 
-          <Grid size= "auto" key={product._id}>
+          <Grid item xs={12} sm={6} md={4} key={product._id}>
             <Card
               sx={{
 

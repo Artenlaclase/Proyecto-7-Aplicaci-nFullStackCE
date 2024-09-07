@@ -1,108 +1,94 @@
 
-import React, { useState, useContext } from 'react'
-
-import UserContext from '../../contexts/users/UserContext'
+import React, { useState, useContext } from 'react';
+import UserContext from '../../contexts/users/UserContext';
+import { TextField, Button, Container, Typography, Box } from '@mui/material';
 
 export default function Register() {
+  const userCtx = useContext(UserContext);
+  const { registerUser } = userCtx;
 
-    const userCtx = useContext(UserContext)
+  const [data, setData] = useState({
+    username: "",
+    email: "",
+    password: ""
+  });
 
-    const {
-        registerUser
-    } = userCtx
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
 
-    const [data, setData] = useState({
-        username: "",
-        email: "",
-        password: ""
-    })
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setData({
+      ...data,
+      [name]: value
+    });
+  };
 
-
-    const handleChange = (event) => {
-
-        event.preventDefault()
-
-        setData({
-            ...data,
-            [event.target.name]: event.target.value
-        })
+  const sendData = async (event) => {
+    event.preventDefault();
+    try {
+      await registerUser(data);
+      setSuccess("Registro exitoso. ¡Bienvenido!");
+      setError("");
+    } catch (err) {
+      setError("Error al registrar. Por favor, inténtalo de nuevo.");
+      setSuccess("");
     }
+  };
 
-    const sendData = (event) => {
-        event.preventDefault()
-        registerUser(data)
-    }
-
-    return (
-        <>
-
-            <div>
-                <div>
-                    <h2>
-                        Crear cuenta
-                    </h2>
-                </div>
-
-                <div>
-                    <div>
-                        <form onSubmit={(e) => { sendData(e) }}>
-                            <div>
-                                <label htmlFor="email">
-                                    Nombre de usuario
-                                </label>
-                                <div>
-                                    <input
-                                        id="username"
-                                        name="username"
-                                        type="text"
-                                        required
-                                        onChange={(e) => { handleChange(e) }}
-                                    />
-                                </div>
-                            </div>
-
-                            <div>
-                                <label htmlFor="email">
-                                    Email
-                                </label>
-                                <div>
-                                    <input
-                                        id="email"
-                                        name="email"
-                                        type="email"
-                                        autoComplete="email"
-                                        required
-                                        onChange={(e) => { handleChange(e) }}
-                                    />
-                                </div>
-                            </div>
-
-                            <div>
-                                <label htmlFor="password">
-                                    Password
-                                </label>
-                                <div>
-                                    <input
-                                        id="password"
-                                        name="password"
-                                        type="password"
-                                        required
-                                        onChange={(e) => { handleChange(e) }}
-                                    />
-                                </div>
-                            </div>
-
-                            <div>
-                                <button type="submit">
-                                    Registrarme
-                                </button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-
-        </>
-    )
+  return (
+    <Container component="main" maxWidth="xs">
+      <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', mt: 8 }}>
+        <Typography variant="h5">Crear cuenta</Typography>
+        <Box
+          component="form"
+          onSubmit={sendData}
+          sx={{ mt: 1, width: '100%' }}
+        >
+          <TextField
+            margin="normal"
+            fullWidth
+            id="username"
+            name="username"
+            label="Nombre de usuario"
+            type="text"
+            required
+            autoFocus
+            onChange={handleChange}
+          />
+          <TextField
+            margin="normal"
+            fullWidth
+            id="email"
+            name="email"
+            label="Email"
+            type="email"
+            required
+            autoComplete="email"
+            onChange={handleChange}
+          />
+          <TextField
+            margin="normal"
+            fullWidth
+            id="password"
+            name="password"
+            label="Contraseña"
+            type="password"
+            required
+            onChange={handleChange}
+          />
+          {error && <Typography color="error">{error}</Typography>}
+          {success && <Typography color="success">{success}</Typography>}
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            sx={{ mt: 3, mb: 2 }}
+          >
+            Registrarme
+          </Button>
+        </Box>
+      </Box>
+    </Container>
+  );
 }
-
