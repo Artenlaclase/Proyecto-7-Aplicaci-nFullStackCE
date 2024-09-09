@@ -1,6 +1,9 @@
-import React, { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Navigate } from 'react-router-dom';
 import UserContext from '../../contexts/users/UserContext';
+import PropTypes from 'prop-types';
+ 
+
 
 export default function AuthRoute({ element: Component, ...props }) {
     const userCtx = useContext(UserContext);
@@ -22,3 +25,5 @@ export default function AuthRoute({ element: Component, ...props }) {
 
     return authStatus ? <Navigate to="/perfil" /> : <Component {...props} />;
 }
+
+AuthRoute.propTypes = {   element: PropTypes.elementType.isRequired,};

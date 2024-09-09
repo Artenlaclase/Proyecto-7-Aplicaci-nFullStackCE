@@ -1,9 +1,8 @@
-import React from 'react';
+// import React from 'react';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
-import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import PaypalButton from "./PayPalButton";
 import Grid from '@mui/material/Grid2';
@@ -12,7 +11,7 @@ const Products = ({ products, activateEditMode, sendDataToDeleteProduct }) => {
   return (
     <div>
       <h1>Relojes</h1>
-      <Grid container spacing={3} sx={{ paddingLeft: 2, paddingRight: 2 }}>
+      <Grid container spacing={3} sx={{ paddingLeft: 2, paddingRight: 2, marginBottom:30}}>
         {products.map((product) => (
 
           <Grid item xs={12} sm={6} md={4} key={product._id}>
