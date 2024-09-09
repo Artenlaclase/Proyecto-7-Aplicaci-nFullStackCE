@@ -43,6 +43,10 @@ const UserState = (props) => {
 
         } catch (error) {
             console.log(error);
+            dispatch({
+                type: "REGISTRAR_ERRORES",
+                payload: true
+            })
         }
     };
 
@@ -91,6 +95,7 @@ return (
             user: globalState.user,
             authStatus: globalState.authStatus,
             loading: globalState.loading,
+            errores: globalState.errores,
             registerUser,
             loginUser,
             verifyingToken,

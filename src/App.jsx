@@ -8,6 +8,7 @@ import Login from "./components/Login/index";
 import UserState from "./contexts/users/UserState";
 import PrivateRoute from "./components/Auth/PrivateRoute";
 import AuthRoute from "./components/Auth/AuthRoute";
+import Footer from "./components/Layout/Footer";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
 
             <Route path="/" element={<Home />} />
           </Routes>
+          <Footer />
         </Router>
       </ProductState>
     </UserState>

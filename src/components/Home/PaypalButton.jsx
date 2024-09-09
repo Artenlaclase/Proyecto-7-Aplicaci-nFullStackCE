@@ -46,7 +46,7 @@ export default class PaypalButton extends React.Component {
 			// or for the button to appear
 		};
 		const options = {
-			'client-id':'AcjUpD1MINOI45QUxPw04w7yepPMwir03tOUrBA9Yswl-owbHBoehYcmI9Y1V8oiPuACgt89k1tWCJ_m',
+			'client-id':'AdKYeXBLEO3lqd0c_ysG76_U23rLdmkBRH6igy3fweWfAKrByg_BaIoGOTpjctOBK7QaRmk3ph_rvV73',
 		};
 		return (
 			<PayPalScriptProvider options={options}>

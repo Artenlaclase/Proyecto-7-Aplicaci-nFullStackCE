@@ -49,13 +49,16 @@ const Products = ({ products, activateEditMode, sendDataToDeleteProduct }) => {
                 <Typography variant="body2" sx={{ color: 'text.secondary' }}>
                   Precio: ${product.precio}
                 </Typography>
-              </CardContent>
-              <CardActions sx={{ justifyContent: 'center', paddingBottom: 2  }}>
+
+                 <CardActions sx={{ justifyContent: 'center', paddingBottom: 2  }}>
                 <PaypalButton valor={product.precio} />
 
                 {/* <Button size="small" onClick={() => activateEditMode(product)}>Editar</Button>
             <Button size="small" onClick={() => sendDataToDeleteProduct(product)}>Borrar</Button> */}
               </CardActions>
+              </CardContent>
+             
+              
             </Card>
           </Grid>
         ))}
