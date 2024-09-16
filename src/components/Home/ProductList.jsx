@@ -4,7 +4,7 @@ import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
-import PaypalButton from "./PayPalButton";
+import PaypalButton from './PaypalButton';
 import Grid from '@mui/material/Grid2';
 
 const Products = ({ products, activateEditMode, sendDataToDeleteProduct }) => {
