@@ -78,28 +78,28 @@ Este proyecto te permitirá desarrollar y profundizar conocimientos en las sigui
 ## Instrucciones para Ejecutar el Proyecto
 
 ### Clonar el Repositorio
-
 ```bash
 git clone <URL_del_repositorio>
-
+```
 ## Instalación de Dependencias
 
 En la carpeta del backend:
 ```bash
 npm install
-
+```
 En la carpeta del frontend:
 ```bash
 npm install
-
+```
 Ejecución del Backend
 ```bash
 npm run dev
-
+```
 Ejecución del Frontend
 ```bash
-
 npm run dev
+```
+
 Variables de Entorno
 Crear un archivo .env en la raíz del proyecto backend con las siguientes variables:
 
