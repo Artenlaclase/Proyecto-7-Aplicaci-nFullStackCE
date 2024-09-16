@@ -11,7 +11,7 @@ const Products = ({ products, activateEditMode, sendDataToDeleteProduct }) => {
   return (
     <div>
       <h1>Relojes</h1>
-      <Grid container spacing={3} sx={{ paddingLeft: 2, paddingRight: 2, marginBottom:30}}>
+      <Grid container spacing={3} sx={{ paddingLeft: 2, paddingRight: 2, marginBottom: 30 }}>
         {products.map((product) => (
 
           <Grid item xs={12} sm={6} md={4} key={product._id}>
@@ -26,22 +26,24 @@ const Products = ({ products, activateEditMode, sendDataToDeleteProduct }) => {
                 margin: 'auto'
               }}>
               <CardMedia
-                sx={{ height: 140, 
+                sx={{
+                  height: 140,
                   width: '100%',
-                  objectFit: 'cover' }}
+                  objectFit: 'cover'
+                }}
                 image={product.imagen}
                 title={product.nombre}
               />
               <CardContent sx={{ flexGrow: 1 }}>
-                <Typography 
-                gutterBottom 
-                variant="h5" 
-                component="div"
-                sx={{ 
-                  overflow: 'hidden', 
-                  textOverflow: 'ellipsis', 
-                  whiteSpace: 'nowrap' 
-                }}
+                <Typography
+                  gutterBottom
+                  variant="h5"
+                  component="div"
+                  sx={{
+                    overflow: 'hidden',
+                    textOverflow: 'ellipsis',
+                    whiteSpace: 'nowrap'
+                  }}
                 >
                   {product.nombre}
                 </Typography>
@@ -49,15 +51,12 @@ const Products = ({ products, activateEditMode, sendDataToDeleteProduct }) => {
                   Precio: ${product.precio}
                 </Typography>
 
-                 <CardActions sx={{ justifyContent: 'center', paddingBottom: 2  }}>
-                <PaypalButton valor={product.precio} />
-
-                {/* <Button size="small" onClick={() => activateEditMode(product)}>Editar</Button>
-            <Button size="small" onClick={() => sendDataToDeleteProduct(product)}>Borrar</Button> */}
-              </CardActions>
+                <CardActions sx={{ justifyContent: 'center', paddingBottom: 2 }}>
+                  <PaypalButton valor={product.precio} />   
+                </CardActions>
               </CardContent>
-             
-              
+
+
             </Card>
           </Grid>
         ))}

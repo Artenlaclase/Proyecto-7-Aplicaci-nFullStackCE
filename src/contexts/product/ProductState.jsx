@@ -18,7 +18,7 @@ const ProductState =(props) => {
             descripcion: dataForm.descripcion,
         }
         try {
-            await axiosClient.post('/product/create', form);
+            await axiosClient.post('api/product/create', form);
             getProducts();
 
         } catch (error) {
@@ -30,7 +30,7 @@ const ProductState =(props) => {
     const getProducts = async () => {
       
         try {
-            const res = await axiosClient.get('/product/readall');
+            const res = await axiosClient.get('api/product/readall');
             console.log('fetched Products', res.data );
             
             dispatch({
@@ -50,7 +50,7 @@ const ProductState =(props) => {
             descripcion: dataForm.descripcion
         };
         try {
-            await axiosClient.put('/product/update/:id', form);
+            await axiosClient.put('api/product/update/:id', form);
             getProducts();
         } catch (error) {
             console.log(error);
@@ -60,7 +60,7 @@ const ProductState =(props) => {
     const deleteProduct = async (id) => {
         const data = { id };
         try {
-            await axiosClient.delete('/product/delete/:id', { data });
+            await axiosClient.delete('api/product/delete/:id', { data });
             getProducts();
         } catch (error) {
             console.log(error);
