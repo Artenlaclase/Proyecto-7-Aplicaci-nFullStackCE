@@ -3,6 +3,9 @@
 ## Descripción
 
 Este proyecto consiste en el desarrollo de una aplicación Fullstack para un negocio de comercio electrónico, que incluye un catálogo de productos, un carrito de compras, y una pasarela de pago segura. También se implementan funciones de autenticación y autorización de usuarios mediante JSON Web Tokens (JWT).
+Backend desplegado en Render: https://app-backend-mongodb-nodejs.onrender.com
+Frontend desplegado en Netlify: https://tiendatiktak.netlify.app/
+
 
 **Desarrollador:** Raúl Rosales R.  
 **Cohorte:** 13  
@@ -68,12 +71,14 @@ Este proyecto te permitirá desarrollar y profundizar conocimientos en las sigui
 
 ### Despliegue
 - Utilización de **MongoDB Atlas** para el almacenamiento de datos.
-- Despliegue del proyecto y generación de una URL para compartir.
+- Despliegue del proyecto y generación de una URL para compartir
+Backend desplegado en Render: https://app-backend-mongodb-nodejs.onrender.com
+Frontend desplegado en Netlify: https://tiendatiktak.netlify.app/
 
 ## Repositorios
 
 - [Repositorio Backend](https://github.com/Artenlaclase/Proyecto-6-Aplicaci-nBakendMongoDBNodeJs)
-- Repositorio Frontend (Por definir)
+- Repositorio Frontend (https://github.com/Artenlaclase/Proyecto-7-Aplicaci-nFullStackCE)
 
 ## Instrucciones para Ejecutar el Proyecto
 
