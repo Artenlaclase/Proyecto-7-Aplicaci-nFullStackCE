@@ -9,6 +9,7 @@ import UserState from "./contexts/users/UserState";
 import PrivateRoute from "./components/Auth/PrivateRoute";
 import AuthRoute from "./components/Auth/AuthRoute";
 import Footer from "./components/Layout/Footer";
+import ProductDetails from "./components/Home/ProductDetails";
 
 function App() {
   return (
@@ -23,6 +24,8 @@ function App() {
             <Route path="/iniciar-sesion" element={<AuthRoute element={Login} />} />
 
             <Route path="/" element={<Home />} />
+            <Route path="/product/:id" element={<ProductDetails />} />
+          
           </Routes>
           <Footer />
         </Router>

@@ -7,19 +7,25 @@ import Typography from '@mui/material/Typography';
 import PaypalButton from './PaypalButton';
 import Grid from '@mui/material/Grid2';
 import CircularProgress from '@mui/material/CircularProgress';
+import { useNavigate } from 'react-router-dom';
 
 
 
 
 const Products = ({ products, activateEditMode, sendDataToDeleteProduct }) => {
   const [loading, setLoading] = useState(true);
-
-  // Simular una carga de productos desde la base de datos
+const navigate = useNavigate();
+ 
   useEffect(() => {
     if (products.length > 0) {
       setLoading(false);
     }
   }, [products]);
+
+  const handleCardClick = (id) => {
+    navigate(`/product/${id}`);
+  };
+
 
   return (
     <div>
@@ -33,13 +39,15 @@ const Products = ({ products, activateEditMode, sendDataToDeleteProduct }) => {
           {products.map((product) => (
             <Grid item xs={12} sm={6} md={4} key={product._id}>
               <Card
+              onClick={() => handleCardClick(product._id)}
                 sx={{
                   display: 'flex',
                   flexDirection: 'column',
                   justifyContent: 'space-between',
                   height: '100%',
                   maxWidth: 345,
-                  margin: 'auto'
+                  margin: 'auto',
+                  cursor: 'pointer'
                 }}>
                 <CardMedia
                   sx={{
