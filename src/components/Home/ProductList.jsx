@@ -29,7 +29,7 @@ const Products = ({ products, activateEditMode, sendDataToDeleteProduct }) => {
           <CircularProgress />
         </div>
       ) : (
-        <Grid container spacing={3} sx={{ paddingLeft: 2, paddingRight: 2, marginBottom: 30 }}>
+        <Grid container spacing={3} sx={{justifyContent: 'center', paddingLeft: 2, paddingRight: 2, marginBottom: 30 }}>
           {products.map((product) => (
             <Grid item xs={12} sm={6} md={4} key={product._id}>
               <Card
