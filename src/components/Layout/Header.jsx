@@ -15,6 +15,8 @@ import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import Divider from '@mui/material/Divider';
 import UserContext from '../../contexts/users/UserContext';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
 
 export default function MenuAppBar() {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -78,71 +80,100 @@ export default function MenuAppBar() {
     </Box>
   );
 
+  const theme = createTheme();
+  const isSmallScreen = useMediaQuery(theme.breakpoints.down('md'));
+
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="fixed">
-        <Toolbar>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-            sx={{ mr: 2 }}
-            onClick={toggleDrawer(true)}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            TIK TAK
-          </Typography>
-          {user?.username ? (
-            <div>
+    <ThemeProvider theme={theme}>
+      <Box sx={{ flexGrow: 1 }}>
+        <AppBar position="fixed">
+          <Toolbar>
+            {isSmallScreen ? (
               <IconButton
                 size="large"
-                aria-label="account of current user"
-                aria-controls="menu-appbar"
-                aria-haspopup="true"
-                onClick={handleMenu}
+                edge="start"
                 color="inherit"
+                aria-label="menu"
+                sx={{ mr: 2 }}
+                onClick={toggleDrawer(true)}
               >
-                <AccountCircle />
+                <MenuIcon />
               </IconButton>
-              <Menu
-                id="menu-appbar"
-                anchorEl={anchorEl}
-                anchorOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
-                }}
-                open={Boolean(anchorEl)}
-                onClose={handleClose}
-              >
-                <MenuItem onClick={handleClose} component={Link} to="/perfil">
-                  Perfil
+            ) : (
+              <>
+                <MenuItem component={Link} to="/">
+                  Inicio
                 </MenuItem>
-                <MenuItem onClick={handleLogout}>Cerrar sesión</MenuItem>
-              </Menu>
-            </div>
-          ) : (
-            <>
-              <MenuItem component={Link} to="/registro">
-                Registro
-              </MenuItem>
-              <MenuItem component={Link} to="/iniciar-sesion">
-                Iniciar sesión
-              </MenuItem>
-            </>
-          )}
-        </Toolbar>
-      </AppBar>
-      <Drawer anchor="left" open={drawerOpen} onClose={toggleDrawer(false)}>
-        {renderDrawerList()}
-      </Drawer>
-    </Box>
+                {user?.username ? (
+                  <>
+                    <MenuItem component={Link} to="/perfil">
+                      Perfil
+                    </MenuItem>
+                    <MenuItem onClick={handleLogout}>
+                      Cerrar sesión
+                    </MenuItem>
+                  </>
+                ) : (
+                  <>
+                    <MenuItem component={Link} to="/registro">
+                      Registro
+                    </MenuItem>
+                    <MenuItem component={Link} to="/iniciar-sesion">
+                      Iniciar sesión
+                    </MenuItem>
+                  </>
+                )}
+              </>
+            )}
+
+            <Typography  variant="h6"
+              component={Link}
+              to="/"
+              sx={{ flexGrow: 1, color: 'inherit', textDecoration: 'none' }}>
+              TIK TAK
+            </Typography>
+
+            {user?.username && (
+              <div>
+                <IconButton
+                  size="large"
+                  aria-label="account of current user"
+                  aria-controls="menu-appbar"
+                  aria-haspopup="true"
+                  onClick={handleMenu}
+                  color="inherit"
+                >
+                  <AccountCircle />
+                </IconButton>
+                <Menu
+                  id="menu-appbar"
+                  anchorEl={anchorEl}
+                  anchorOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right',
+                  }}
+                  keepMounted
+                  transformOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right',
+                  }}
+                  open={Boolean(anchorEl)}
+                  onClose={handleClose}
+                >
+                  <MenuItem onClick={handleClose} component={Link} to="/perfil">
+                    Perfil
+                  </MenuItem>
+                  <MenuItem onClick={handleLogout}>Cerrar sesión</MenuItem>
+                </Menu>
+              </div>
+
+            )}
+          </Toolbar>
+        </AppBar>
+        <Drawer anchor="left" open={drawerOpen} onClose={toggleDrawer(false)}>
+          {renderDrawerList()}
+        </Drawer>
+      </Box>
+    </ThemeProvider >
   );
 }
