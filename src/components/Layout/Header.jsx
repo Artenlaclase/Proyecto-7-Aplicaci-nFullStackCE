@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import { useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -88,7 +88,9 @@ export default function MenuAppBar() {
       <Box sx={{ flexGrow: 1 }}>
         <AppBar position="fixed">
           <Toolbar>
-            {isSmallScreen ? (
+
+         
+            {isSmallScreen && (
               <IconButton
                 size="large"
                 edge="start"
@@ -99,8 +101,19 @@ export default function MenuAppBar() {
               >
                 <MenuIcon />
               </IconButton>
-            ) : (
-              <>
+            )}
+
+        
+            <Typography
+              variant="h6"
+              component={Link}
+              to="/"
+              sx={{ color: 'inherit', textDecoration: 'none', flexGrow: 1 }} // Mantener "flexGrow: 1" para que el título ocupe el espacio central
+            >
+              TIK TAK
+            </Typography>
+            {!isSmallScreen && (
+              <Box sx={{ display: 'flex', alignItems: 'center' }}>
                 <MenuItem component={Link} to="/">
                   Inicio
                 </MenuItem>
@@ -123,15 +136,8 @@ export default function MenuAppBar() {
                     </MenuItem>
                   </>
                 )}
-              </>
+              </Box>
             )}
-
-            <Typography  variant="h6"
-              component={Link}
-              to="/"
-              sx={{ flexGrow: 1, color: 'inherit', textDecoration: 'none' }}>
-              TIK TAK
-            </Typography>
 
             {user?.username && (
               <div>
@@ -166,8 +172,8 @@ export default function MenuAppBar() {
                   <MenuItem onClick={handleLogout}>Cerrar sesión</MenuItem>
                 </Menu>
               </div>
-
             )}
+
           </Toolbar>
         </AppBar>
         <Drawer anchor="left" open={drawerOpen} onClose={toggleDrawer(false)}>
