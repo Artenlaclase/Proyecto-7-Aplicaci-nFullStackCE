@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from 'react';
 import { Navigate } from 'react-router-dom';
 import UserContext from '../../contexts/users/UserContext';
 import PropTypes from 'prop-types';
-import { CircularProgress } from '@mui/material';
+import { CircularProgress, Box} from '@mui/material';
 
 
 
