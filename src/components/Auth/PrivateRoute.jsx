@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from 'react';
 import { Navigate } from 'react-router-dom';
 import UserContext from '../../contexts/users/UserContext';
+import { CircularProgress } from '@mui/material';
 
 export default function PrivateRoute({ element: Component, ...props }) {
     const userCtx = useContext(UserContext);
@@ -17,7 +18,18 @@ export default function PrivateRoute({ element: Component, ...props }) {
     }, [authStatus]);
 
     if (loading) {
-        return null; // o algún spinner de carga
+        return (
+            <Box
+                sx={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    height: '100vh',
+                }}
+            >
+                <CircularProgress />
+            </Box>
+        );
     }
 
     return authStatus ? <Component {...props} /> : <Navigate to="/" />;

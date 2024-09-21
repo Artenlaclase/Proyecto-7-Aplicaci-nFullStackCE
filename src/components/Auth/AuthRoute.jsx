@@ -2,7 +2,8 @@ import { useContext, useEffect, useState } from 'react';
 import { Navigate } from 'react-router-dom';
 import UserContext from '../../contexts/users/UserContext';
 import PropTypes from 'prop-types';
- 
+import { CircularProgress } from '@mui/material';
+
 
 
 export default function AuthRoute({ element: Component, ...props }) {
@@ -20,10 +21,21 @@ export default function AuthRoute({ element: Component, ...props }) {
     }, [authStatus]);
 
     if (loading) {
-        return null; // Puedes reemplazarlo por un componente de carga si lo prefieres
+        return (
+            <Box
+                sx={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    height: '100vh',
+                }}
+            >
+                <CircularProgress />
+            </Box>
+        );
     }
 
     return authStatus ? <Navigate to="/perfil" /> : <Component {...props} />;
 }
 
-AuthRoute.propTypes = {   element: PropTypes.elementType.isRequired,};
+AuthRoute.propTypes = { element: PropTypes.elementType.isRequired, };
